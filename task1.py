@@ -176,6 +176,7 @@ def example(print_map = True):
         print("".join(line))
 
     print(path)
+#test the code
 example()
 #map=Map_Obj(task=1)
-#print(map.print_map(map))
+#print(map.show_map())
