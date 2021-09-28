@@ -55,8 +55,11 @@ def astar(map, start, end, allow_diagonal_movement = False):
 
     #setup the start and goalnodes
     start_node = Node(None, start)
-    start_node.g = start_node.h = start_node.f = 0
     goal_node = Node(None, end)
+    start_node.g = 0
+    start_node.h = heruistic(start_node.position, goal_node.position)
+    start_node.f = start_node.g+start_node.h
+    
     goal_node.g = goal_node.h = goal_node.f = 0
 
     #initialize the open and closed lists
@@ -80,6 +83,7 @@ def astar(map, start, end, allow_diagonal_movement = False):
     #loop until you find the goal node
     while len(open_list) > 0:
         outer_iterations += 1
+        
 
         #if outer_iterations > max_iterations:
           #return the current path if we hit
@@ -127,7 +131,7 @@ def astar(map, start, end, allow_diagonal_movement = False):
             child.h=heruistic(child.position,goal_node.position,"L1")
             child.f = child.g + child.h
 
-            #if the child is already on the open list
+            #if the child is already on the open list and g is already lower
             if len([open_node for open_node in open_list if child.position == open_node.position and child.g > open_node.g]) > 0:
                 continue
 
@@ -177,6 +181,13 @@ def example(print_map = True):
 
     print(path)
 #test the code
+map_obj=Map_Obj(task=1)
+map1=map_obj.read_map("./Samfundet_map_1.csv")[0]
+start=map_obj.get_start_pos()
+goal=map_obj.get_goal_pos()
+#astar(map1,start,goal)
 example()
-#map=Map_Obj(task=1)
-#print(map.show_map())
+#map_obj.print_map(map1)
+#print(map1)
+#res=astar(map1,start,goal)
+
