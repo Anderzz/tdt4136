@@ -103,7 +103,7 @@ def astar(map, start, end, allow_diagonal_movement = False):
             map_value=map[new_pos[0]][new_pos[1]]
             
             #avoid roadblocks
-            if map_value =='#':
+            if map_value ==' # ':
                 continue
             
             #create neighbour node
@@ -139,4 +139,5 @@ for koord in res:
     visual[koord[0]][koord[1]] = '-> '
       
 map1.print_map(visual)
+map1.show_map(visual)
       
