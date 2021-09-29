@@ -1,6 +1,6 @@
 from source import *
 
-map1=Map_Obj(task=1)
+map1=Map_Obj(task=2)
 kart=map1.get_maps()[1]
 start=map1.get_start_pos()
 startnode=(start[0],start[1])
