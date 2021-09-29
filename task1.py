@@ -1,4 +1,4 @@
-from source import *
+from source1 import *
 
 map1=Map_Obj(task=1)
 kart=map1.get_maps()[1]

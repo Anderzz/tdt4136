@@ -8,10 +8,10 @@ class Node:
     A node class for A* Pathfinding
     """
 
-    def __init__(self, parent=None, position=None):
+    def __init__(self, parent=None, position=None, cost=0):
         self.parent = parent
         self.position = position
-
+        self.cost=cost
         self.g = 0
         self.h = 0
         self.f = 0
@@ -52,7 +52,7 @@ def add_to_open(open, neighbour):
     return True
 
 
-def astar(map, start, end, allow_diagonal_movement = False):
+def astar(map, costmap, start, end):
     """
     Returns the path as a list of tuples from start to end in the given map
     :param map:
@@ -62,8 +62,8 @@ def astar(map, start, end, allow_diagonal_movement = False):
     """
 
     #setup the start and goalnodes
-    start_node = Node(None, start)
-    goal_node = Node(None, end)
+    start_node = Node(None, start,0)
+    goal_node = Node(None, end,0)
     start_node.g = 0
     start_node.h = heuristic(start_node.position, goal_node.position)
     start_node.f = start_node.g+start_node.h
@@ -107,14 +107,16 @@ def astar(map, start, end, allow_diagonal_movement = False):
                 continue
             
             #create neighbour node
-            neighbour=Node(current_node,new_pos)
+            cost=costmap[new_pos[0]][new_pos[1]]
+            neighbour=Node(current_node,new_pos, cost)
             
             #check if new node is already in closed_list
             if neighbour in closed_list:
                 continue
             
             #set the heuristics
-            neighbour.g = heuristic(neighbour.position, start_node.position, 'L1')
+            #neighbour.g = heuristic(neighbour.position, start_node.position, 'L1')
+            neighbour.g = current_node.g+cost
             neighbour.h = heuristic(neighbour.position, goal_node.position, 'L1')
             neighbour.f = neighbour.g + neighbour.h
             
@@ -125,19 +127,5 @@ def astar(map, start, end, allow_diagonal_movement = False):
     #no path is found
     return None
 
-map1=Map_Obj(task=1)
-kart=map1.get_maps()[1]
-start=map1.get_start_pos()
-startnode=(start[0],start[1])
-goal=map1.get_goal_pos()
-goalnode=(goal[0],goal[1])
-print(startnode,goalnode)
-res=astar(kart,startnode,goalnode)
-print(res)
-visual=kart
-for koord in res:
-    visual[koord[0]][koord[1]] = '-> '
-      
-map1.print_map(visual)
-map1.show_map(visual)
+
       
