@@ -54,9 +54,9 @@ def add_to_open(open, neighbour):
 def astar(map, start, end):
     """
     Returns the path as a list of tuples from start to end in the given map
-    :param map:
-    :param start:
-    :param end:
+    :param map:     the given map
+    :param start:   the start node
+    :param end:     the goal node
     :return:
     """
 

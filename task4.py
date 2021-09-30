@@ -1,7 +1,7 @@
 from source2 import *
 
 #get the map from handout code
-map1=Map_Obj(task=3)
+map1=Map_Obj(task=4)
 kart=map1.get_maps()[1]
 costs=map1.get_maps()[0]
 #get the start and goal nodes and unzip their components
